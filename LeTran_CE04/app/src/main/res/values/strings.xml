@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">LeTran_CE04</string>
+    <string-array name="listViewItems">
+        <item>List View</item>
+        <item>Grid View</item>
+    </string-array>
+    <string-array name="arrayAdapterItems">
+        <item>Array Adapter</item>
+        <item>Simple Adapter</item>
+        <item>Base Adapter</item>
+    </string-array>
 </resources>
