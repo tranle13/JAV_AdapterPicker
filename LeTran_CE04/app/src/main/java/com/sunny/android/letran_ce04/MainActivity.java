@@ -50,7 +50,7 @@ import java.util.ArrayList;
             if (selectedView == 0) {
                 Log.i(TAG, "onItemSelected: WERE");
                 pListView.setVisibility(View.VISIBLE);
-                //pGridView.setVisibility(View.INVISIBLE);
+                pGridView.setVisibility(View.INVISIBLE);
             } else {
                 Log.i(TAG, "onItemSelected: USED TO");
                 pListView.setVisibility(View.INVISIBLE);
@@ -117,7 +117,8 @@ import java.util.ArrayList;
             fullNames.add(human.toString());
         }
 
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, android.R.id.text1, fullNames);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(MainActivity.this, android.R.layout.simple_list_item_1, android.R.id.text1, fullNames);
+
         if (selectedView == 0) {
             pListView.setAdapter(arrayAdapter);
         } else if (selectedView == 1) {
