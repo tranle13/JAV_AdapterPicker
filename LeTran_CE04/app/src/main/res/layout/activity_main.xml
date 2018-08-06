@@ -33,16 +33,18 @@
     </LinearLayout>
 
     <ListView
+        android:visibility="gone"
+        android:layout_marginTop="8dp"
         android:id="@+id/listView"
-        android:visibility="visible"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
     <GridView
         android:id="@+id/gridView"
-        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:columnWidth="100dp"
         android:numColumns="2"
-        android:stretchMode="spacingWidth"/>
+        android:stretchMode="columnWidth" />
 </LinearLayout>
