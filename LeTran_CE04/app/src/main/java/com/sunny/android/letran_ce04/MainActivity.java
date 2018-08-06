@@ -13,9 +13,11 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import android.widget.Spinner;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
     public class MainActivity extends AppCompatActivity {
 
@@ -57,7 +59,12 @@ import java.util.ArrayList;
                 pGridView.setVisibility(View.VISIBLE);
             }
 
-            setupArrayAdapter();
+            if (selectedAdapter == 0) {
+                setupArrayAdapter();
+            } else if (selectedAdapter == 1) {
+                setupSimpleAdapter();
+            }
+
             Log.i(TAG, "onItemClick: "+selectedView+" "+parent.getItemAtPosition(position));
         }
 
@@ -76,6 +83,8 @@ import java.util.ArrayList;
 
             if (selectedAdapter == 0) {
                 setupArrayAdapter();
+            } else if (selectedAdapter == 1) {
+                setupSimpleAdapter();
             }
         }
 
@@ -117,13 +126,48 @@ import java.util.ArrayList;
             fullNames.add(human.toString());
         }
 
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(MainActivity.this, android.R.layout.simple_list_item_1, android.R.id.text1, fullNames);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(MainActivity.this, android.
+                R.layout.simple_list_item_1, android.R.id.text1, fullNames);
 
         if (selectedView == 0) {
             pListView.setAdapter(arrayAdapter);
         } else if (selectedView == 1) {
             Log.i(TAG, "setupArrayAdapter: DUDE");
             pGridView.setAdapter(arrayAdapter);
+        }
+    }
+
+    // Create function to show the data for simple adapter
+    protected void setupSimpleAdapter() {
+        final String keyFullName = "fullName";
+        final String keyBirthday = "birthday";
+
+        ArrayList<HashMap<String, String>> dataCollection = new ArrayList<>();
+
+        for (Person human: people) {
+            HashMap<String, String> map = new HashMap<>();
+
+            String strFullName = human.toString();
+            String strBirthday = human.getBirthday();
+
+            map.put(keyFullName, strFullName);
+            map.put(keyBirthday, strBirthday);
+
+            dataCollection.add(map);
+        }
+
+        final String[] keys = new String[]{keyFullName, keyBirthday};
+
+        int[] viewIds = new int[] { R.id.txt_SimpleAdapter_FullName, R.id.txt_SimpleAdapter_Birthday };
+
+        SimpleAdapter simpleAdapter = new SimpleAdapter(MainActivity.this, dataCollection,
+                R.layout.simpleadapter_custom_view, keys, viewIds);
+
+        if (selectedView == 0) {
+            pListView.setAdapter(simpleAdapter);
+        } else if (selectedView == 1) {
+            Log.i(TAG, "setupArrayAdapter: DUDE");
+            pGridView.setAdapter(simpleAdapter);
         }
     }
 

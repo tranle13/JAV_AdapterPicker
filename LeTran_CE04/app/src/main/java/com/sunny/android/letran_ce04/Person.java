@@ -5,8 +5,6 @@
 
 package com.sunny.android.letran_ce04;
 
-    import android.media.Image;
-
     class Person {
 
     // Member variables
@@ -22,8 +20,6 @@ package com.sunny.android.letran_ce04;
         pBirthday = _birthday;
         pAvatar = _avatar;
     }
-
-    String getFullName() { return pFirstName + pLastName; }
 
     String getBirthday() { return pBirthday; }
 
