@@ -5,6 +5,7 @@
 
 package com.sunny.android.letran_ce04;
 
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -60,8 +61,6 @@ import java.util.HashMap;
             }
 
             setupAllAdapters();
-
-            Log.i(TAG, "onItemClick: "+selectedView+" "+parent.getItemAtPosition(position));
         }
 
         @Override
@@ -75,7 +74,6 @@ import java.util.HashMap;
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
             selectedAdapter = position;
-            Log.i(TAG, "onItemClick: "+selectedAdapter+" "+parent.getItemAtPosition(position));
 
             setupAllAdapters();
         }
@@ -104,7 +102,19 @@ import java.util.HashMap;
     protected void findList_GridView() {
         try {
             pListView = (ListView)findViewById(R.id.listView);
+            pListView.setOnItemClickListener(new ListView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    buildAlert(position);
+                }
+            });
             pGridView = (GridView)findViewById(R.id.gridView);
+            pGridView.setOnItemClickListener(new GridView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    buildAlert(position);
+                }
+            });
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -124,7 +134,6 @@ import java.util.HashMap;
         if (selectedView == 0) {
             pListView.setAdapter(arrayAdapter);
         } else if (selectedView == 1) {
-            Log.i(TAG, "setupArrayAdapter: DUDE");
             pGridView.setAdapter(arrayAdapter);
         }
     }
@@ -158,7 +167,6 @@ import java.util.HashMap;
         if (selectedView == 0) {
             pListView.setAdapter(simpleAdapter);
         } else if (selectedView == 1) {
-            Log.i(TAG, "setupArrayAdapter: DUDE");
             pGridView.setAdapter(simpleAdapter);
         }
     }
@@ -182,6 +190,17 @@ import java.util.HashMap;
         } else if (selectedAdapter == 2) {
             setupBaseAdapter();
         }
+    }
+
+    // Create function to make alert dialog
+    private void buildAlert(int position) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        Person chosen = people.get(position);
+        builder.setTitle(chosen.toString());
+        builder.setMessage(chosen.getBirthday());
+        builder.setIcon(chosen.getImageID());
+        builder.setPositiveButton(R.string.alert_pos_btn, null);
+        builder.show();
     }
 
 }

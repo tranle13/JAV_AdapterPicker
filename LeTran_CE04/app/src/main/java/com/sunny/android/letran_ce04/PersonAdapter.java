@@ -26,6 +26,7 @@ class PersonAdapter extends BaseAdapter {
         people = _people;
     }
 
+    // Override functions
     @Override
     public int getCount() {
         if (people != null) {
@@ -70,6 +71,7 @@ class PersonAdapter extends BaseAdapter {
         return convertView;
     }
 
+    // Optimize with ViewHolder
     static class ViewHolder {
         TextView txt_FullName;
         TextView txt_Birthday;

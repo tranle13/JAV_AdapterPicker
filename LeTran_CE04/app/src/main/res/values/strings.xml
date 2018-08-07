@@ -9,4 +9,5 @@
         <item>Simple Adapter</item>
         <item>Base Adapter</item>
     </string-array>
+    <string name="alert_pos_btn">Close</string>
 </resources>
