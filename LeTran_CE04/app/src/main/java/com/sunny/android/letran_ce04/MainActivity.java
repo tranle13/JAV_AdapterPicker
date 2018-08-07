@@ -59,11 +59,7 @@ import java.util.HashMap;
                 pGridView.setVisibility(View.VISIBLE);
             }
 
-            if (selectedAdapter == 0) {
-                setupArrayAdapter();
-            } else if (selectedAdapter == 1) {
-                setupSimpleAdapter();
-            }
+            setupAllAdapters();
 
             Log.i(TAG, "onItemClick: "+selectedView+" "+parent.getItemAtPosition(position));
         }
@@ -81,11 +77,7 @@ import java.util.HashMap;
             selectedAdapter = position;
             Log.i(TAG, "onItemClick: "+selectedAdapter+" "+parent.getItemAtPosition(position));
 
-            if (selectedAdapter == 0) {
-                setupArrayAdapter();
-            } else if (selectedAdapter == 1) {
-                setupSimpleAdapter();
-            }
+            setupAllAdapters();
         }
 
         @Override
@@ -168,6 +160,27 @@ import java.util.HashMap;
         } else if (selectedView == 1) {
             Log.i(TAG, "setupArrayAdapter: DUDE");
             pGridView.setAdapter(simpleAdapter);
+        }
+    }
+
+    // Create function to show data for base adapter
+    protected void setupBaseAdapter() {
+        PersonAdapter adapter = new PersonAdapter(this, people);
+        if (selectedView == 0 && pListView != null) {
+            pListView.setAdapter(adapter);
+        } else if (selectedView == 1 && pGridView != null) {
+            pGridView.setAdapter(adapter);
+        }
+    }
+
+    // Create function to setup adapters
+    protected void setupAllAdapters() {
+        if (selectedAdapter == 0) {
+            setupArrayAdapter();
+        } else if (selectedAdapter == 1) {
+            setupSimpleAdapter();
+        } else if (selectedAdapter == 2) {
+            setupBaseAdapter();
         }
     }
 
